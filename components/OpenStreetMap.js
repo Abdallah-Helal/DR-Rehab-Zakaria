@@ -10,7 +10,7 @@ const GoogleMapPage = () => {
         height="550"
         style={{ border: 0 }}
         allowFullScreen=""
-        loading="lazy"
+        loading="fast"
         referrerPolicy="no-referrer-when-downgrade"
       ></iframe>
       <div></div>
