@@ -1,7 +1,7 @@
 import ReactGA from "react-ga";
 
 export const initGA = () => {
-  ReactGA.initialize("G-4VCP8043K6");
+  ReactGA.initialize("*****");
 };
 
 export const logPageView = () => {
