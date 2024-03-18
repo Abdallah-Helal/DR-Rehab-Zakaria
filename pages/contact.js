@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "../styles/contact.module.css";
 import { Facebook, Phone, Instagram } from "lucide-react";
-import dynamic from "next/dynamic";
 import OpenStreetMap from "../components/OpenStreetMap";
+import axios from "axios";
 
 const services = [
   "Botox",
@@ -22,24 +22,36 @@ export default function Contact() {
   const [timeSlot, setTimeSlot] = useState("");
   const [selectedService, setSelectedService] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can handle form submission, for example, sending the data to an API
-    console.log("Form submitted:", {
-      name,
-      email,
-      phone,
-      date,
-      timeSlot,
-      selectedService,
-    });
-    // Reset the form fields after submission
-    setName("");
-    setEmail("");
-    setPhone("");
-    setDate("");
-    setTimeSlot("");
-    setSelectedService("");
+    let formData = {
+      name: name,
+      email: email,
+      phone: phone,
+      date: date,
+      timeSlot: timeSlot,
+      Service: selectedService,
+    };
+    // let formDataJSON = JSON.stringify(formData);
+
+    // alert(formDataJSON);
+    try {
+      await axios.post("/api/sendEmail", formData);
+
+      console.log("Form submitted:", formData);
+      alert("Message sent successfully!");
+
+      // Reset the form fields after submission
+      setName("");
+      setEmail("");
+      setPhone("");
+      setDate("");
+      setTimeSlot("");
+      setSelectedService("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("Failed to send message. Please try again later.");
+    }
   };
 
   return (
